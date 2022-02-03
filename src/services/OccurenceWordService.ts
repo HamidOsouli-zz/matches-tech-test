@@ -1,6 +1,6 @@
 import { ReadStream } from "fs";
 
-export default class OccurenceTextService {
+export default class OccurenceWordService {
   // we use a hashMap to store occurrences since keys are unique and quick access time is important
   private occurrenceHashMap: Map<string, number> = new Map<string, number>();
   private SPACE_PATTERN: RegExp = /\s+/g;
@@ -36,6 +36,7 @@ export default class OccurenceTextService {
         .split(" ");
       // loop throughout the words of each chunk and compute the hashMap
       words.forEach((word) => {
+        // since comparison is case-insensitive
         if (this.occurrenceHashMap.has(word.toLowerCase())) {
           this.occurrenceHashMap.set(
             word.toLowerCase(),
