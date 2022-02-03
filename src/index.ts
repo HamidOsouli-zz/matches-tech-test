@@ -2,8 +2,9 @@ import OccurenceWordService from "./services/OccurenceWordService";
 import path from "path";
 import { createReadStream } from "fs";
 
-const readable = createReadStream(path.resolve("input.txt"));
-const occurenceWordService = new OccurenceWordService(readable);
+const fileReadable = createReadStream(path.resolve("input.txt"));
+const occurenceWordService = new OccurenceWordService();
+occurenceWordService.setup(fileReadable);
 
 occurenceWordService
   .getTopOccurredWords(3)

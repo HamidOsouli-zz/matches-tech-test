@@ -146,4 +146,7 @@ dist
 
 .DS_Store
 
+# Coverage
+coverage
+
 # End of https://www.toptal.com/developers/gitignore/api/node

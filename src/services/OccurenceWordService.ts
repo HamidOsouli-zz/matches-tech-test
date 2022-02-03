@@ -1,4 +1,4 @@
-import { ReadStream } from "fs";
+import { Readable } from "stream";
 
 export default class OccurenceWordService {
   // we use a hashMap to store occurrences since keys are unique and quick access time is important
@@ -7,9 +7,9 @@ export default class OccurenceWordService {
   // everything except a word (which consists of a-z or ' or space in between)
   private NON_WORD_PATTERN: RegExp = /[^a-zA-Z' ]+/;
   // uses streams to handle large inputs, either from file or simple string
-  private inputStream: ReadStream;
+  private inputStream: Readable = Readable.from([]);
 
-  constructor(inputStream: ReadStream) {
+  setup(inputStream: Readable) {
     this.inputStream = inputStream;
   }
 
@@ -40,17 +40,23 @@ export default class OccurenceWordService {
         if (this.occurrenceHashMap.has(word.toLowerCase())) {
           this.occurrenceHashMap.set(
             word.toLowerCase(),
-            (this.occurrenceHashMap.get(word.toLocaleLowerCase()) || 0) + 1
+            (this.occurrenceHashMap.get(word.toLowerCase()) || 0) + 1
           );
         }
         // here we check for word to prevent empty strings as a word
         else if (word) {
-          this.occurrenceHashMap.set(word, 1);
+          this.occurrenceHashMap.set(word.toLowerCase(), 1);
         }
       });
     }
     console.timeEnd("execuiton time");
     // get the top limit words with most occurrences
-    return Array.from(this.occurrenceHashMap.keys()).slice(0, limit);
+    return Array.from(this.occurrenceHashMap.entries())
+      .sort(
+        (firstOccurrence, secondOccurence) =>
+          secondOccurence[1] - firstOccurrence[1]
+      )
+      .map((entry) => entry[0])
+      .slice(0, limit);
   }
 }
