@@ -52,6 +52,7 @@ export default class OccurenceWordService {
     console.timeEnd("execuiton time");
     // get the top limit words with most occurrences
     return Array.from(this.occurrenceHashMap.entries())
+    // sort DESC with the occurence
       .sort(
         (firstOccurrence, secondOccurence) =>
           secondOccurence[1] - firstOccurrence[1]

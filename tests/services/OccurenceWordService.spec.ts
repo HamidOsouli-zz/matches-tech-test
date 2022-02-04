@@ -17,6 +17,7 @@ describe("OccurrenceWordService", () => {
     expect(instance).toBeInstanceOf(OccurenceWordService);
   });
 
+  // NOTE: since input file could be anything, test could fail if we didn't change assertion
   it("should return a, of, on as 3 top words from file", async () => {
     input = createReadStream(path.resolve("input.txt"));
     instance.setup(input);
