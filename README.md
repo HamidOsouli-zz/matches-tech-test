@@ -49,6 +49,20 @@ yarn dev
 yarn start:production
 ```
 
+## ⌛️ Metrics
+```
+Time execution table for M1 macbook pro 💻
+
+```
+| Number of Lines        | Execution Time           |
+| ------------- |:-------------:|
+| 7     | 3.123ms |
+| 1,000     | 10.232ms |
+| 500,000     | 1.191s    |
+| 1,000,000 | 2.265s      |
+```
+```
+
 🌟 You are all set!
 
 ## 💻 Built with
